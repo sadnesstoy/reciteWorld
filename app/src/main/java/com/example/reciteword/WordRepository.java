@@ -53,6 +53,13 @@ public class WordRepository {
         return wordList;
     }
 
+    // 清空数据库
+    public void clearDatabase() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL("DELETE FROM words"); // 删除所有单词数据
+        db.close();
+    }
+
     // 从文件加载数据并插入数据库
     public void loadWordsFromFileAndInsert(Context context) {
         List<Word> words = FileUtils.readWordsFromFile(context);
