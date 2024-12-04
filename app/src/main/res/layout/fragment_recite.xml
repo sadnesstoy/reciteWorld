@@ -153,16 +153,18 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/knowButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/rounded_button"
                     android:text="认识"
                     android:textColor="#ff000000"
                     android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:background="@drawable/rounded_button"/>
+                    android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/unknowButton"
                     android:layout_width="match_parent"
