@@ -16,6 +16,9 @@ public class Data {
         wordList = wordRepository.getAllWords();  // 从数据库加载所有单词
     }
 
+    public static int getWordListSize() {
+        return wordList.size();
+    }
 
     private static int numCount = 0,randNum = getNum(wordList.size()+1);
     public static void setNumCount(int numCount){

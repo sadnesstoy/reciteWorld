@@ -35,20 +35,21 @@ public class brushFragment extends Fragment {
     }
 
     private void initWordList(){
-        int[] ints =new int[90];
+        int wordListSize = Data.getWordListSize(); // 获取单词总数
+        int[] ints =new int[wordListSize];
         wordList.clear();
 
-        for(int i=0;i<90;i++) {
+        for(int i=0;i<wordListSize;i++) {
             ints[i] = i;
         }
-        for (int i=0;i<90;i++){
+        for (int i=0;i<wordListSize;i++){
             int temp,x;
-            x=getNum(90);
+            x=getNum(wordListSize);
             temp = ints[x];
             ints[x] = ints[i];
             ints[i] = temp;
         }
-        for (int i=0;i<90;i++){
+        for (int i=0;i<wordListSize;i++){
             Word word = new Word(Data.getWord(ints[i]),Data.getPron(ints[i]),Data.getwordDefine(ints[i]),getNum(3),0);
             wordList.add(word);
         }
