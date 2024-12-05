@@ -70,13 +70,13 @@ public class reciteFragment extends Fragment {
                     Data.setRandNum();
                     wordText.setText(Data.getWord(Data.getRandNum()));
                     isFirstClick = true;  // 重置标志位
+                    // 更新单词的次数
+                    int cnt = sharedPre.getInt("word" + Data.getRandNum(), 0);
+                    cnt++;
+                    editor.putInt("word" + Data.getRandNum(), cnt);
+                    editor.apply();
                 }
 
-                // 更新单词的次数
-                int cnt = sharedPre.getInt("word" + Data.getRandNum(), 0);
-                cnt++;
-                editor.putInt("word" + Data.getRandNum(), cnt);
-                editor.apply();
             }
         });
 
