@@ -1,6 +1,7 @@
 package com.example.reciteword;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +51,16 @@ public class Data {
             return random.nextInt(endNum);
         }
         return 0;
+    }
+
+    public static void updateWordInDatabase(Word word) {
+        if (wordRepository != null) {
+            int rowsUpdated = wordRepository.updateWord(word);
+            if (rowsUpdated > 0) {
+                Log.d("Database", "Word updated successfully");
+            } else {
+                Log.d("Database", "No word updated");
+            }
+        }
     }
 }

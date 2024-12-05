@@ -67,4 +67,27 @@ public class WordRepository {
             insertWord(word);
         }
     }
+
+    // 更新单词
+    public int updateWord(Word word) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        // 将需要更新的字段放入 ContentValues 中
+        values.put("word", word.getWord());
+        values.put("pron", word.getPron());
+        values.put("definition", word.getDefinition());
+        values.put("showNum", word.getShowNum());
+        values.put("flag", word.getFlag());
+
+        // 选择更新条件：根据 word 的 ID 来更新
+        String whereClause = "word = ?";  // 假设根据 word 字段来确定唯一单词
+        String[] whereArgs = new String[]{word.getWord()}; // 用实际的 word 值来匹配
+
+        // 执行更新操作
+        int rowsUpdated = db.update("words", values, whereClause, whereArgs);
+        db.close();
+
+        return rowsUpdated;  // 返回更新的行数
+    }
 }
