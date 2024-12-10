@@ -49,9 +49,15 @@ public class reciteFragment extends Fragment {
             if (isFirstClick) {
                 knowButton.setText("认识");
                 unknowButton.setText("不认识");
+                // 加载第一个单词
+                reciteViewModel.loadRandomWord();
             } else {
                 knowButton.setText("下一词");
                 unknowButton.setText("记错了");
+                Word currentWord = reciteViewModel.getCurrentWord().getValue();
+                if (currentWord != null) {
+                    definitionText.setText(currentWord.getPron() + "\n" + currentWord.getDefinition());
+                }
             }
         });
 
