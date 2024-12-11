@@ -97,4 +97,19 @@ public class WordRepository {
 
         return rowsDeleted; // 返回删除的行数
     }
+
+    // 检查数据库是否为空
+    public boolean isDatabaseEmpty() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM words", null);
+
+        int count = 0;
+        if (cursor != null && cursor.moveToFirst()) {
+            count = cursor.getInt(0); // 获取数据行数
+            cursor.close();
+        }
+        db.close();
+        return count == 0; // 如果为0，表示数据库为空
+    }
+
 }

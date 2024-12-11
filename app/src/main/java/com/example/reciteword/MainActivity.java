@@ -26,15 +26,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         wordRepository = new WordRepository(this);
-        // 清空数据库并重新加载数据
-        wordRepository.clearDatabase();
-
-        // 从文件读取单词数据并插入到数据库
-        List<Word> wordList = FileUtils.readWordsFromFile(this,"word.txt");
-        for (Word word : wordList) {
-            wordRepository.insertWord(word);
+        // 如果数据库为空，重新加载数据
+        if (wordRepository.isDatabaseEmpty()) {
+            // 从文件读取单词数据并插入到数据库
+            List<Word> wordList = FileUtils.readWordsFromFile(this, "word.txt");
+            for (Word word : wordList) {
+                wordRepository.insertWord(word);
+            }
+            Data.initWordList(this);  // 初始化数据
         }
-        Data.initWordList(this);
         Intent intent = new Intent(MainActivity.this,InterfaceActivity.class);
         startActivity(intent);
     }
