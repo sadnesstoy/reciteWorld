@@ -60,13 +60,6 @@ public class WordRepository {
         db.close();
     }
 
-    /*// 从文件加载数据并插入数据库
-    public void loadWordsFromFileAndInsert(Context context) {
-        List<Word> words = FileUtils.readWordsFromFile(context);
-        for (Word word : words) {
-            insertWord(word);
-        }
-    }*/
 
     // 更新单词
     public int updateWord(Word word) {
@@ -89,5 +82,19 @@ public class WordRepository {
         db.close();
 
         return rowsUpdated;  // 返回更新的行数
+    }
+
+    // 删除单词
+    public int deleteWord(Word word) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // 定义删除条件
+        String whereClause = "word = ?";
+        String[] whereArgs = new String[]{word.getWord()};
+
+        // 执行删除操作
+        int rowsDeleted = db.delete("words", whereClause, whereArgs);
+        db.close();
+
+        return rowsDeleted; // 返回删除的行数
     }
 }

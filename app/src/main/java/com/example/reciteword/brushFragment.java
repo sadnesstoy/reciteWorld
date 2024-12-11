@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -56,6 +58,12 @@ public class brushFragment extends Fragment {
                 }
             }
         });
+
+        // 监听单词块点击事件
+        listView.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
+            Word selectedWord = wordList.get(position);
+            showDeleteConfirmationDialog(selectedWord, position);
+        });
     }
 
     private void loadMoreData() {
@@ -87,6 +95,30 @@ public class brushFragment extends Fragment {
             // 如果没有更多数据，显示提示
             Toast.makeText(getActivity(), "没有更多单词了", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showDeleteConfirmationDialog(Word word, int position) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("删除单词")
+                .setMessage("确定要删除单词：" + word.getWord() + " 吗？")
+                .setPositiveButton("删除", (dialog, which) -> {
+                    deleteWord(word, position);
+                })
+                .setNegativeButton("取消", null)
+                .show();
+    }
+
+    private void deleteWord(Word word, int position) {
+        // 从数据库中删除单词
+        WordRepository wordRepository = new WordRepository(getActivity().getApplication());
+        wordRepository.deleteWord(word);
+
+        // 从列表中移除单词
+        wordList.remove(position);
+        adapter.notifyDataSetChanged();
+
+        // 提示用户
+        Toast.makeText(getActivity(), "单词已删除", Toast.LENGTH_SHORT).show();
     }
 
     private static int getNum(int endNum) {
