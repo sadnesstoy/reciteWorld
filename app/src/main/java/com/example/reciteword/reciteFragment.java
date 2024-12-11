@@ -113,12 +113,7 @@ public class reciteFragment extends Fragment {
         // 设置按钮点击事件
         knowButton.setOnClickListener(v -> reciteViewModel.markAsKnown());
         unknowButton.setOnClickListener(v -> reciteViewModel.markAsUnknown());
-        tipsButton.setOnClickListener(v -> {
-            Word currentWord = reciteViewModel.getCurrentWord().getValue();
-            if (currentWord != null) {
-                definitionText.setText(currentWord.getPron() + "\n" + currentWord.getDefinition());
-            }
-        });
+        tipsButton.setOnClickListener(v -> reciteViewModel.marktipsButton(getActivity()));
 
         // 加载第一个单词
         reciteViewModel.loadRandomWord();
