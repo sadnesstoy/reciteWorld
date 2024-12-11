@@ -65,27 +65,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="173dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="出现次数:"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:gravity="center_vertical"
                     android:alpha="1"
-                    />
+                    android:gravity="center_vertical"
+                    android:text="出现次数:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/word_flag"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="#FF2196F3"
-                    android:gravity="center_vertical"
                     android:alpha="1"
-                    />
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
             </LinearLayout>
 
         </LinearLayout>

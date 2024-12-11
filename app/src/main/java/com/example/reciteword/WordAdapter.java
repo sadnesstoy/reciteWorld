@@ -26,7 +26,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         wordContext.setText(word.getWord());
         wordDefinition.setText(word.getDefinition());
         wordPron.setText(word.getPron()+"");
-        wordFlag.setText(word.getShowNum()+"");
+        wordFlag.setText(word.getShowNum()+" 错误次数：" +word.getFlag());
         return view;
     }
 }
