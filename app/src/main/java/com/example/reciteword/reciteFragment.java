@@ -49,7 +49,6 @@ public class reciteFragment extends Fragment {
         // 创建一个包含所有词库的列表，包含“词库”项作为默认项
         List<String> wordLibraries = new ArrayList<>();
         wordLibraries.add("词库"); // 默认项
-        wordLibraries.add("default");
         wordLibraries.add("TOEFL");
         wordLibraries.add("GRE");
         wordLibraries.add("IELTS");

@@ -52,7 +52,34 @@ public class WordRepository {
         //db.close();
         return wordList;
     }
+    // 获取所有 showNum > 0 的单词
+    public List<Word> getWordsWithNonZeroShowNum() {
+        List<Word> wordList = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        // 使用查询条件 "showNum > 0" 只获取 showNum 大于 0 的单词
+        String selection = "showNum > ?";
+        String[] selectionArgs = new String[] { "0" };
+
+        Cursor cursor = db.query("words", null, selection, selectionArgs, null, null, null);
+
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String word = cursor.getString(cursor.getColumnIndex("word"));
+                String pron = cursor.getString(cursor.getColumnIndex("pron"));
+                String definition = cursor.getString(cursor.getColumnIndex("definition"));
+                int showNum = cursor.getInt(cursor.getColumnIndex("showNum"));
+                int flag = cursor.getInt(cursor.getColumnIndex("flag"));
+
+                Word w = new Word(word, pron, definition, showNum, flag);
+                wordList.add(w);
+            }
+            cursor.close();
+        }
+
+        // db.close(); 这里可以选择不关闭数据库，因为在方法结束时会自动关闭连接
+        return wordList;
+    }
     // 清空数据库
     public void clearDatabase() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -97,6 +124,8 @@ public class WordRepository {
 
         return rowsDeleted; // 返回删除的行数
     }
+
+
 
     // 检查数据库是否为空
     public boolean isDatabaseEmpty() {
