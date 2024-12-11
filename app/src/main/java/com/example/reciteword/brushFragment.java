@@ -66,23 +66,24 @@ public class brushFragment extends Fragment {
         });
     }
 
+    // 加载更多数据
     private void loadMoreData() {
-        // 判断是否还有数据加载
-        int totalWords = Data.getWordListSize();
+        // 获取最新的单词列表
+        WordRepository wordRepository = new WordRepository(getActivity());
+
+        // 获取数据库中的所有单词，注意这里是每次都从数据库获取最新数据
+        List<Word> latestWords = wordRepository.getAllWords();
+
+        // 判断是否有更多数据需要加载
+        int totalWords = latestWords.size();
         if (currentPage * pageSize < totalWords) {
-            // 如果还有更多数据，加载下一批
+            // 如果有更多数据，加载下一批
             int start = currentPage * pageSize;
             int end = Math.min(start + pageSize, totalWords);
 
             // 加载新的数据
             for (int i = start; i < end; i++) {
-                Word word = new Word(
-                        Data.getWord(i),
-                        Data.getPron(i),
-                        Data.getwordDefine(i),
-                        getNum(3),
-                        0
-                );
+                Word word = latestWords.get(i);
                 wordList.add(word);
             }
 

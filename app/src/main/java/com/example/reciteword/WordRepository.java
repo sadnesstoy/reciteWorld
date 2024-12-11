@@ -26,7 +26,7 @@ public class WordRepository {
         values.put("flag", word.getFlag());
 
         long id = db.insert("words", null, values); // 插入数据，返回插入的行 ID
-        db.close();
+        //db.close();
         return id;
     }
 
@@ -49,7 +49,7 @@ public class WordRepository {
             }
             cursor.close();
         }
-        db.close();
+        //db.close();
         return wordList;
     }
 
@@ -57,7 +57,7 @@ public class WordRepository {
     public void clearDatabase() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.execSQL("DELETE FROM words"); // 删除所有单词数据
-        db.close();
+        //db.close();
     }
 
 
@@ -79,7 +79,7 @@ public class WordRepository {
 
         // 执行更新操作
         int rowsUpdated = db.update("words", values, whereClause, whereArgs);
-        db.close();
+        //db.close();
 
         return rowsUpdated;  // 返回更新的行数
     }
@@ -93,7 +93,7 @@ public class WordRepository {
 
         // 执行删除操作
         int rowsDeleted = db.delete("words", whereClause, whereArgs);
-        db.close();
+        //db.close();
 
         return rowsDeleted; // 返回删除的行数
     }

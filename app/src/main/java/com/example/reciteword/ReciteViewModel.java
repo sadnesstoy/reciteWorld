@@ -32,14 +32,32 @@ public class ReciteViewModel extends ViewModel {
     }
 
     public void markAsKnown() {
+        Word word = currentWord.getValue();
+        if (word != null ) {
+            // 增加单词的展示次数
+            word.setShowNum(word.getShowNum() + 1);
+
+            // 更新数据库中的单词
+            wordRepository.updateWord(word);
+        }
         isFirstClick.setValue(!isFirstClick.getValue());
+
     }
 
     public void markAsUnknown() {
+        Word word = currentWord.getValue();
+        if (word != null) {
+            // 增加单词的展示次数
+            word.setShowNum(word.getShowNum() + 1);
+
+            // 增加 flag（表示没记住）
+            word.setFlag(word.getFlag() + 1);
+
+            // 更新数据库中的单词
+            wordRepository.updateWord(word);
+
+        }
         isFirstClick.setValue(!isFirstClick.getValue());
     }
 
-    public void setWordList(List<Word> words) {
-        
-    }
 }

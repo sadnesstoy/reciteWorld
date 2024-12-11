@@ -41,6 +41,7 @@ public class wrongFragment extends Fragment {
      * 从 SharedPreferences 加载错误单词数据
      */
     private void loadWrongWords() {
+
         SharedPreferences sharedPre = getActivity().getSharedPreferences("t", Context.MODE_PRIVATE);
         int wrongNum = sharedPre.getInt("wrongNum", 0);
 
