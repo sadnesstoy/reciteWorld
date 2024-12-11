@@ -38,4 +38,8 @@ public class ReciteViewModel extends ViewModel {
     public void markAsUnknown() {
         isFirstClick.setValue(!isFirstClick.getValue());
     }
+
+    public void setWordList(List<Word> words) {
+        
+    }
 }

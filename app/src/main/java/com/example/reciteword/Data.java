@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Data {
     private static List<Word> wordList = new ArrayList<>();
-    private static WordRepository wordRepository;
+    static WordRepository wordRepository;
 
     // 初始化方法，接受一个 Context 以便使用数据库
     public static void initWordList(Context context) {

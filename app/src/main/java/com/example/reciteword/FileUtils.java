@@ -12,14 +12,14 @@ import java.util.List;
 
 public class FileUtils {
 
-    // 从 assets 文件夹中读取 words.txt 文件内容并解析
-    public static List<Word> readWordsFromFile(Context context) {
+    // 从 assets 文件夹中读取指定文件内容并解析
+    public static List<Word> readWordsFromFile(Context context, String fileName) {
         List<Word> wordList = new ArrayList<>();
         AssetManager assetManager = context.getAssets();
 
         try {
-            // 读取 assets 文件夹中的 words.txt 文件
-            BufferedReader reader = new BufferedReader(new InputStreamReader(assetManager.open("word.txt")));
+            // 读取 assets 文件夹中的指定文件
+            BufferedReader reader = new BufferedReader(new InputStreamReader(assetManager.open(fileName)));
             String line;
             while ((line = reader.readLine()) != null) {
                 // 假设每行数据是：单词 发音 定义
@@ -34,7 +34,7 @@ public class FileUtils {
             }
             reader.close();
         } catch (IOException e) {
-            Log.e("FileUtils", "Error reading file", e);
+            Log.e("FileUtils", "Error reading file: " + fileName, e);
         }
 
         return wordList;

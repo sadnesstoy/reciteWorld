@@ -60,13 +60,13 @@ public class WordRepository {
         db.close();
     }
 
-    // 从文件加载数据并插入数据库
+    /*// 从文件加载数据并插入数据库
     public void loadWordsFromFileAndInsert(Context context) {
         List<Word> words = FileUtils.readWordsFromFile(context);
         for (Word word : words) {
             insertWord(word);
         }
-    }
+    }*/
 
     // 更新单词
     public int updateWord(Word word) {

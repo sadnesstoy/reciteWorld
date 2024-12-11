@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         wordRepository.clearDatabase();
 
         // 从文件读取单词数据并插入到数据库
-        List<Word> wordList = FileUtils.readWordsFromFile(this);
+        List<Word> wordList = FileUtils.readWordsFromFile(this,"word.txt");
         for (Word word : wordList) {
             wordRepository.insertWord(word);
         }
