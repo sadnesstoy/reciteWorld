@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ReciteViewModel extends ViewModel {
@@ -28,10 +30,34 @@ public class ReciteViewModel extends ViewModel {
     }
 
     public void loadRandomWord() {
+        // 获取所有单词
         List<Word> wordList = wordRepository.getAllWords();
-        if (!wordList.isEmpty()) {
-            int randomIndex = (int) (Math.random() * wordList.size());
-            currentWord.setValue(wordList.get(randomIndex));
+
+        if (wordList.size() > 5) {
+            // 随机选择 20 个单词
+            List<Word> randomWords = new ArrayList<>();
+            while (randomWords.size() < 5) {
+                int randomIndex = (int) (Math.random() * wordList.size());
+                Word randomWord = wordList.get(randomIndex);
+                if (!randomWords.contains(randomWord)) {
+                    randomWords.add(randomWord);
+                }
+            }
+
+            // 按照错误率（错误次数 / 显示次数）排序
+            Word highestErrorRateWord = randomWords.stream()
+                    .filter(word -> word.getShowNum() > 0) // 避免除以 0
+                    .max(Comparator.comparingDouble(word -> (double) word.getFlag() / word.getShowNum()))
+                    .orElse(null);
+
+            // 如果所有错误率为 0，随机选择一个单词
+            if (highestErrorRateWord == null) {
+                int randomIndex = (int) (Math.random() * randomWords.size());
+                highestErrorRateWord = randomWords.get(randomIndex);
+            }
+
+            // 设置当前单词
+            currentWord.setValue(highestErrorRateWord);
         }
     }
 
